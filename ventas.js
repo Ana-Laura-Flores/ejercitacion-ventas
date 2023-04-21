@@ -303,20 +303,7 @@ console.log(ventasMes(1, 2019))
 console.log(ventasMes(3, 2019)) 
 
 
-//ventasVendedora
-//Crear una funcion ventasVendedora(nombre) debe obtener las ventas totales realizadas por una vendedora sin límite de fecha.
 
-const ventasVendedora = (nombre) => {
-  let ventasTotalesVendedora = 0
-  for (const venta of local.ventas) {
-    if(venta.nombreVendedora === nombre){
-      ventasTotalesVendedora += 1
-    }
-  }
-  return ventasTotalesVendedora
-}
-
-console.log(ventasVendedora("Grace"))
 
 //componenteMasVendido
 //Crear una funcion componenteMasVendido(), devuelve el nombre del componente que más ventas tuvo historicamente. El dato de la cantidad de ventas es el que indica la función cantidadVentasComponente.
@@ -336,24 +323,26 @@ const cantidadVentasComponente = (componente) => {
   }
   return cantidadVentas
 }
-
+cantidadVentasComponente()
 const componenteMasVendido = () => {
   const componentesVentas = []
   const cadaVenta = local.ventas
   for (const cadaComponente of cadaVenta){
+    console.log(cadaComponente)
     for (const nombreComponente of cadaComponente.componentes){
       if (!componentesVentas.includes(nombreComponente)){
         componentesVentas.push(nombreComponente)
+        
       }
-  
+      
     }
   }
+  console.log(componentesVentas)
   const componenteMasVendido = {}
   for (const componente of componentesVentas){
-    //console.log(componente)
+    console.log(componente)
       componenteMasVendido[componente] = cantidadVentasComponente(componente)
     }
-    const ventasComponentes = (Object.values(componenteMasVendido))
     
     }
   //console.log(componenteMasVendido)
@@ -361,6 +350,23 @@ const componenteMasVendido = () => {
 
 console.log(componenteMasVendido())
 
+
+/*
+const ventasComponentes = (Object.values(componenteMasVendido))
+    const nombreComponentes = Object.keys (componenteMasVendido)
+    console.log(ventasComponentes)
+    console.log(nombreComponentes)
+    let componenteMayorVenta = 0
+    for (const unaVentaComponente of ventasComponentes){
+      if (unaVentaComponente > componenteMayorVenta){
+        componenteMayorVenta = unaVentaComponente
+      }
+        //console.log(unaVentaComponente)
+    }
+      if (componenteMayorVenta = unaVentaComponente){
+        return nombreComponentes
+      }
+*/
 /*
 for (let i = 1; i < componenteMasVendido.length; i++){
       if(ventasComponentes[0] > ventasComponentes[i]){
@@ -381,7 +387,21 @@ const componenteMasVendido = {}
   }
 */
 // }
+//
+//ventasVendedora
+//Crear una funcion ventasVendedora(nombre) debe obtener las ventas totales realizadas por una vendedora sin límite de fecha.
 
+const ventasVendedora = (nombre) => {
+  let ventasTotalesVendedora = 0
+  for (const venta of local.ventas) {
+    if(venta.nombreVendedora === nombre){
+      ventasTotalesVendedora += 1
+    }
+  }
+  return ventasTotalesVendedora
+}
+
+console.log(ventasVendedora("Grace"))
 //ventasSucursal
 //Crear la función ventasSucursal(sucursal), que obtiene las ventas totales realizadas por una sucursal sin límite de fecha.
 
@@ -401,4 +421,18 @@ console.log(ventasSucursal("Centro"))
 //optimizacion
 //Las funciones ventasSucursal y ventasVendedora tienen mucho código en común, ya que es la misma funcionalidad pero trabajando con una propiedad distinta. Entonces, ¿cómo harías para que ambas funciones reutilicen código y evitemos repetir?
 
-//const ventasOptimizadas = (propiedad, )
+const ventasOptimizadas = (propiedad, nombre)=> {
+let ventas = 0
+  for (const venta of local.ventas) {
+    if (venta[propiedad] === nombre) {
+      ventas += 1
+    }
+  }
+  return ventas
+}
+
+console.log(ventasOptimizadas("sucursal", "Centro"))
+console.log(ventasOptimizadas("nombreVendedora", "Grace"))
+
+//sucursalDelMes
+//Crear la función sucursalDelMes(mes, anio), que se le pasa dos parámetros numéricos, y devuelve el nombre de la sucursal que más vendió en plata en el mes. No cantidad de ventas, sino importe total de las ventas. El importe de una venta es el que indica la función precioMaquina. El mes es un número entero que va desde el 1 (enero) hasta el 12 (diciembre).
