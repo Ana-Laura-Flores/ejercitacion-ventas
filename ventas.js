@@ -436,3 +436,33 @@ console.log(ventasOptimizadas("nombreVendedora", "Grace"))
 
 //sucursalDelMes
 //Crear la función sucursalDelMes(mes, anio), que se le pasa dos parámetros numéricos, y devuelve el nombre de la sucursal que más vendió en plata en el mes. No cantidad de ventas, sino importe total de las ventas. El importe de una venta es el que indica la función precioMaquina. El mes es un número entero que va desde el 1 (enero) hasta el 12 (diciembre).
+
+const sucursalDelMes = (mes, anio) => {
+  const ventasTotales = local.ventas
+  for (let i = 1; i < ventasTotales.length; i++){
+    if (ventasTotales[i].fecha.getMonth() === mes && (ventasTotales[i].fecha.getFullYear() === anio)){
+      if (precioMaquina(ventasTotales[0].componentes) > precioMaquina(ventasTotales[i].componentes)){
+        return ventasTotales[i].sucursal
+      }
+    }
+  }
+  return "Este mes y año no hubo ventas"
+}
+
+console.log(sucursalDelMes(1, 2019))
+
+//optimizacion
+const loMejorDelMes = (mes, anio, propiedad) => {
+  const ventasTotales = local.ventas
+  for (let i = 1; i < ventasTotales.length; i++){
+    if (ventasTotales[i].fecha.getMonth() === mes && (ventasTotales[i].fecha.getFullYear() === anio)){
+      if (precioMaquina(ventasTotales[0].componentes) > precioMaquina(ventasTotales[i].componentes)){
+        return ventasTotales[i][propiedad]
+      }
+    }
+  }
+  return "Este mes y año no hubo ventas"
+}
+
+console.log(loMejorDelMes(1, 2019, "sucursal"))
+console.log(loMejorDelMes(3, 2019, "nombreVendedora"))
