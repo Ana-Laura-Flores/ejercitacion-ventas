@@ -85,31 +85,31 @@ const local = {
     {
       fecha: new Date(2019, 1, 16),
       nombreVendedora: "Sheryl",
-      componentes: ["Monitor GPRS 3000", "RAM Quinston Fury"],
+      componentes: ["HDD Toyiva", "RAM Quinston Fury"],
       sucursal: "Centro",
     },
     {
       fecha: new Date(2019, 1, 27),
       nombreVendedora: "Hedy",
-      componentes: ["Motherboard ASUS 1200", "HDD Toyiva"],
+      componentes: ["HDD Toyiva", "HDD Toyiva"],
       sucursal: "Caballito",
     },
     {
       fecha: new Date(2019, 1, 22),
       nombreVendedora: "Grace",
-      componentes: ["Monitor ASC 543", "HDD Wezter Dishital"],
+      componentes: ["Monitor ASC 543", "HDD Toyiva"],
       sucursal: "Centro",
     },
     {
       fecha: new Date(2019, 3, 5),
       nombreVendedora: "Ada",
-      componentes: ["Motherboard ASUS 1500", "RAM Quinston"],
+      componentes: ["HDD Toyiva", "HDD Toyiva"],
       sucursal: "Centro",
     },
     {
       fecha: new Date(2019, 3, 1),
       nombreVendedora: "Grace",
-      componentes: ["Motherboard MZI", "HDD Wezter Dishital"],
+      componentes: ["HDD Toyiva", "HDD Toyiva"],
       sucursal: "Centro",
     },
     {
@@ -319,28 +319,106 @@ const cantidadVentasComponente = (componente) => {
   }
   return cantidadVentas;
 };
-console.log(cantidadVentasComponente())
+console.log(cantidadVentasComponente());
 
-const componentesVentas = [];
 const componenteMasVendido = () => {
- 
-  const cadaVenta = local.ventas;
-  for (const cadaComponente of cadaVenta) {
-    //console.log(cadaComponente)
-    for (const nombreComponente of cadaComponente.componentes) {
-      if (!componentesVentas.includes(nombreComponente)) {
-        componentesVentas.push(nombreComponente);
-       }
-       const sumatoriaVentas = 0
-       if(cantidadVentasComponente(nombreComponente) > sumatoriaVentas){
-        return nombreComponente
-        
-      }
+  let ventasComponentes = [];
+  const precios = local.precios;
+  for (const componente of local.precios) {
+    ventasComponentes.push(cantidadVentasComponente(componente.componente));
+  }
+  const masVentas = Math.max(...ventasComponentes);
+  for (const componente of local.precios) {
+    if (masVentas === cantidadVentasComponente(componente.componente)) {
+      return componente.componente;
     }
   }
-}
+};
+console.log(componenteMasVendido());
 
-console.log(componenteMasVendido())
+/*
+const componenteMasVendido = () => {
+  let ventasComponentes = []
+  const precios = local.precios
+  
+  for (const componente of local.precios){
+    ventasComponentes.push(cantidadVentasComponente(componente.componente))
+    // if === cantidadVentasComponente(componente.componente)){
+    //   return componente
+    // }
+  }
+  
+  const masVentas = Math.max(...ventasComponentes)
+  
+  for (const componente of local.precios){
+    if(masVentas === cantidadVentasComponente(componente.componente)){
+      return componente.componente
+    }
+  
+  }
+  // for (const unComponente of ventasComponentes){
+  //   console.log(Math.max(unComponente))
+  //   if (unComponente > unComponente){
+  //     console.log(local.precios.componente)
+  //   }
+  console.log()
+  console.log(masVentas)
+  //console.log(cantidadVentasComponente(local.precios.componente))
+}
+console.log(componenteMasVendido());
+*/
+
+/* 
+const componenteMasVendido = () => {
+  const componentesVentas = [];
+  const cadaVenta = local.ventas;
+  let componenteMayorVenta = [];
+  //console.log(cantidadVentasComponente(cadaVenta.componentes))
+  //console.log(cadaVenta.componentes)
+  for (const cadaComponente of cadaVenta) {
+    //console.log(cadaComponente.componentes)
+    //console.log(cantidadVentasComponente(cadaComponente.componentes))
+   for (const componente of cadaComponente.componentes) {
+    console.log((componente))
+
+
+     //console.log(cantidadVentasComponente(componente))
+      //console.log(Math.max(cantidadVentasComponente(componente)))
+      // if(Math.max(cantidadVentasComponente(componente))){
+      //   console.log(componenteMayorVenta.push(componente))
+      // }
+      // console.log(componenteMayorVenta.push(cantidadVentasComponente(componente)))
+      // console.log(Math.max(componenteMayorVenta))
+      //console.log(componente)
+      //if ((cantidadVentasComponente(componente))) {
+        //componenteMayorVenta = cantidadVentasComponente(componente);
+        //console.log(Math.max(cantidadVentasComponente(componente)))
+      //}
+      
+    }
+    
+  }
+  return componentesVentas
+};
+*/
+
+/*
+for (const cadaComponente of cadaVenta) {
+     console.log(cadaComponente)
+    for (const nombreComponente of cadaComponente.componentes) {
+      console.log(cadaComponente.componentes)
+      // if (!componentesVentas.includes(nombreComponente)) {
+      //   componentesVentas.push(nombreComponente);
+      // }
+      //  console.log(componentesVentas)
+       const sumatoriaVentas = 0
+       if(cantidadVentasComponente(nombreComponente) > sumatoriaVentas){
+              
+      }
+      return nombreComponente
+    }
+  }
+*/
 /*
 const componenteMasVendido = () => {
   const componentesVentas = [];
@@ -372,7 +450,7 @@ const componenteMasVendido = () => {
 //       }
 //     }
 //   }
- 
+
 // const ventasComponentes = (Object.values(cantidadVentasComponente))
 //     const nombreComponentes = Object.keys (cantidadVentasComponente)
 //     console.log(ventasComponentes)
