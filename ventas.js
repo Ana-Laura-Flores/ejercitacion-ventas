@@ -277,8 +277,9 @@ const vendedoraDelMes = (mes, anio) => {
 */
 //ventasMes
 //Crear una funcion ventasMes(mes, anio) debe obtener las ventas de un mes. El mes es un número entero que va desde el 1 (enero) hasta el 12 (diciembre).
-let sumaVentas = 0;
+
 const ventasMes = (mes, anio) => {
+  let sumaVentas = 0;
   const ventasTodas = local.ventas;
   for (let i = 0; i < ventasTodas.length; i++) {
     if (
@@ -291,7 +292,7 @@ const ventasMes = (mes, anio) => {
   return sumaVentas;
 };
 
-console.log(ventasMes(1, 2019));
+//console.log(ventasMes(1, 2019));
 
 // const ventasTodas = local.ventas
 // console.log(ventasTodas)
@@ -323,12 +324,12 @@ console.log(cantidadVentasComponente());
 
 const componenteMasVendido = () => {
   let ventasComponentes = [];
-  const precios = local.precios;
-  for (const componente of local.precios) {
+  const { precios } = local
+  for (const componente of precios) {
     ventasComponentes.push(cantidadVentasComponente(componente.componente));
   }
   const masVentas = Math.max(...ventasComponentes);
-  for (const componente of local.precios) {
+  for (const componente of precios) {
     if (masVentas === cantidadVentasComponente(componente.componente)) {
       return componente.componente;
     }
@@ -534,6 +535,16 @@ const ventasSucursal = (sucursal) => {
   }
   return ventasSucursales;
 };
+const ventasSucursal2 = (sucursal) => {
+  let ventasSucursales = 0;
+  for (const venta of local.ventas) {
+    if (venta.sucursal === sucursal) {
+      ventasSucursales += precioMaquina(venta.componentes);
+    }
+  }
+  return ventasSucursales;
+};
+console.log(ventasSucursal2("Caballito"))
 
 console.log(ventasSucursal("Caballito"));
 console.log(ventasSucursal("Centro"));
@@ -603,3 +614,84 @@ console.log(loMejorDelMes(3, 2019, "nombreVendedora"));
 
 //renderPorMes
 //Crear una funcion renderPorMes() que muestre una lista ordenada del importe total vendido por cada mes/año (usar console.log, no crear una lista en html).
+
+const renderPorMes = () => {
+  
+
+  if ((ventasMes(1,2019))>0){
+    console.log(ventasMes(1,2019))
+  }
+  if ((ventasMes(2,2019))>0){
+    console.log(ventasMes(2,2019))
+  }
+  if ((ventasMes(3,2019))>0){
+    console.log(ventasMes(3,2019))
+  }
+  if ((ventasMes(4,2019))>0){
+    console.log(ventasMes(4,2019))
+  }
+  if ((ventasMes(5,2019))>0){
+    console.log(ventasMes(5,2019))
+  }
+  if ((ventasMes(6,2019))>0){
+    console.log(ventasMes(6,2019))
+  }
+  if ((ventasMes(7,2019))>0){
+    console.log(ventasMes(7,2019))
+  }
+  if ((ventasMes(8,2019))>0){
+    console.log(ventasMes(8,2019))
+  }
+  if ((ventasMes(9,2019))>0){
+    console.log(ventasMes(9,2019))
+  }
+  if ((ventasMes(10,2019))>0){
+    console.log(ventasMes(10,2019))
+  }
+  if ((ventasMes(11,2019))>0){
+    console.log(ventasMes(11,2019))
+  }
+  if ((ventasMes(12,2019))>0){
+    console.log(ventasMes(12,2019))
+  }
+  
+  
+}
+renderPorMes()
+
+const renderPorMes2 = (mes, anio) => {
+  if(ventasMes(mes, anio) > 0){
+    console.log(ventasMes(mes, anio))
+  }    
+}
+renderPorMes2(1, 2019)
+renderPorMes2(2, 2019)
+renderPorMes2(3, 2019)
+renderPorMes2(6, 2019)
+
+//renderPorSucursal
+//Crear una funcion renderPorSucursal() que muestre una lista del importe total vendido por cada sucursal. (Usar console.log, no crear una lista en html).
+
+const renderPorSucursal = (sucursal) => {
+  console.log(ventasSucursal2(sucursal))
+}
+renderPorSucursal("Centro")
+renderPorSucursal("Caballito")
+
+const renderPorSucursal2 = () => {
+  if ((ventasSucursal2("Centro"))>0){
+    console.log(ventasSucursal2("Centro"))
+  }
+  if ((ventasSucursal2("Caballito"))>0){
+    console.log(ventasSucursal2("Caballito"))
+  }
+}
+renderPorSucursal2()
+
+//render
+//Crear una funcion render() que tiene que mostrar la unión de los dos reportes anteriores, cual fue el producto más vendido y la vendedora que más ingresos generó. (Usar console.log, no crear una lista en html).
+
+const render = () => {
+  console.log (`El componente más vendido fue: ${componenteMasVendido()} y la vendedora que más ingresos generó fue: ${vendedoraDelMes(3, 2019)}`)
+}
+render()
